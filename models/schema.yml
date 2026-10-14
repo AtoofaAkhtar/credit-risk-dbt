@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: stg_loans
+    description: "Standardized synthetic loan records."
+    columns:
+      - name: loan_id
+        description: "Unique loan identifier."
+        tests:
+          - unique
+          - not_null
+
+      - name: borrower_id
+        tests:
+          - not_null
+
+      - name: outstanding_balance
+        tests:
+          - not_null
+
+      - name: risk_segment
+        tests:
+          - accepted_values:
+              values: ['Low', 'Medium', 'High']
+
+  - name: mart_credit_risk
+    description: "Portfolio-level risk reporting by segment."
+    columns:
+      - name: risk_segment
+        tests:
+          - unique
+          - not_null
